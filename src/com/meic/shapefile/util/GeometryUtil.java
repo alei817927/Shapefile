@@ -15,25 +15,25 @@ public class GeometryUtil {
   private static final int DEFAULT_BATCH_UNION_COUNT = 10;
   private static GeometryComparator DEFAULT_GEOMETRY_COMPARATOR = new GeometryComparator();
 
-  private static List<Geometry> mergeGeometrys(List<Geometry> geometrys, int batchCount, int round) {
-    List<Geometry> _unionGeometrys = new ArrayList<>();
+  private static List<Geometry> mergeGeometries(List<Geometry> geometries, int batchCount, int round) {
+    List<Geometry> _unionGeometries = new ArrayList<>();
     Geometry _tmpGeometry = null;
     int i = 0;
-    for (; i < geometrys.size(); i++) {
-      Geometry _geometry = geometrys.get(i);
+    for (; i < geometries.size(); i++) {
+      Geometry _geometry = geometries.get(i);
       if (i % batchCount == 0 && i > 0) {
-        _unionGeometrys.add((Geometry) _tmpGeometry.clone());
+        _unionGeometries.add((Geometry) _tmpGeometry.clone());
         _tmpGeometry = null;
       }
       _tmpGeometry = union(_tmpGeometry, _geometry);
     }
-    _unionGeometrys.add(_tmpGeometry);
+    _unionGeometries.add(_tmpGeometry);
     i = 0;
-    if (_unionGeometrys.size() > batchCount) {
-      Collections.sort(_unionGeometrys, DEFAULT_GEOMETRY_COMPARATOR);
-      return mergeGeometrys(_unionGeometrys, batchCount, round + 1);
+    if (_unionGeometries.size() > batchCount) {
+      Collections.sort(_unionGeometries, DEFAULT_GEOMETRY_COMPARATOR);
+      return mergeGeometries(_unionGeometries, batchCount, round + 1);
     }
-    return _unionGeometrys;
+    return _unionGeometries;
   }
 
   public static Geometry union(Geometry g1, Geometry g2) {
@@ -43,32 +43,32 @@ public class GeometryUtil {
     return g1.union(g2);
   }
 
-  public static Geometry union(List<Geometry> geometrys) {
-    return union(geometrys, DEFAULT_BATCH_UNION_COUNT);
+  public static Geometry union(List<Geometry> geometries) {
+    return union(geometries, DEFAULT_BATCH_UNION_COUNT);
   }
 
-  public static Geometry union(List<Geometry> geometrys, int batchCount) {
-    List<Geometry> _unionGeometrys = mergeGeometrys(geometrys, batchCount, 1);
+  public static Geometry union(List<Geometry> geometries, int batchCount) {
+    List<Geometry> _unionGeometries = mergeGeometries(geometries, batchCount, 1);
     Geometry _unionGeometry = null;
-    for (Geometry _geometry : _unionGeometrys) {
+    for (Geometry _geometry : _unionGeometries) {
       _unionGeometry = union(_unionGeometry, _geometry);
     }
     return _unionGeometry;
   }
 
   public static List<Geometry> readShpFile(String file) throws Exception {
-    List<Geometry> _geometrys = new ArrayList<>();
+    List<Geometry> _geometries = new ArrayList<>();
     ShpFiles sf = new ShpFiles(file);
     ShapefileReader r = new ShapefileReader(sf, false, false, new GeometryFactory());
     try {
       while (r.hasNext()) {
         Geometry _shape = (Geometry) r.nextRecord().shape(); // com.vividsolutions.jts.geom.Geometry;
-        _geometrys.add(_shape);
+        _geometries.add(_shape);
       }
     } finally {
       if (r != null) r.close();
     }
-    return _geometrys;
+    return _geometries;
   }
 
   public static Envelope getEnvelope(String file) throws Exception {

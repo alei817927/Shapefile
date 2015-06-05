@@ -28,7 +28,7 @@ import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
-import com.meic.shapefile.excutor.GeometryExcuter;
+import com.meic.shapefile.excutor.GeometryExecutor;
 /**
  * Geometry manager.
  * @author alei
@@ -40,7 +40,7 @@ public abstract class GeometryManager {
 	private static final int DEFAULT_THREAD_NUM = 8;
 	private ExecutorService poll;
 	protected String file;
-	protected ResourceInfo resouceInfo;
+	protected ResourceInfo resourceInfo;
 	protected int processCount = 0;
 
 	public GeometryManager(String baseFile, String newFile) throws Exception {
@@ -59,7 +59,7 @@ public abstract class GeometryManager {
 		String[] _typeNames = _dataStore.getTypeNames();
 		String _typeName = _typeNames[0];
 		FeatureSource<SimpleFeatureType, SimpleFeature> _featureSource = _dataStore.getFeatureSource(_typeName);
-		resouceInfo = _featureSource.getInfo();
+		resourceInfo = _featureSource.getInfo();
 		FeatureCollection<SimpleFeatureType, SimpleFeature> _collection = _featureSource.getFeatures();
 
 		FeatureIterator<SimpleFeature> _iterator = _collection.features();
@@ -70,15 +70,15 @@ public abstract class GeometryManager {
 		_iterator.close();
 	}
 
-	public void excute(GeometryExcuter excuter) {
+	public void execute(GeometryExecutor excuter) {
 		poll.execute(excuter);
 	}
 
 	protected SimpleFeatureBuilder getSimpleFeatureBuilder(Map<String, Class<?>> params) {
 		SimpleFeatureTypeBuilder _featureTypeBuilder = new SimpleFeatureTypeBuilder();
-		_featureTypeBuilder.setCRS(resouceInfo.getCRS());
-		_featureTypeBuilder.setName(resouceInfo.getName());
-		_featureTypeBuilder.description(resouceInfo.getDescription());
+		_featureTypeBuilder.setCRS(resourceInfo.getCRS());
+		_featureTypeBuilder.setName(resourceInfo.getName());
+		_featureTypeBuilder.description(resourceInfo.getDescription());
 		for (String _key : params.keySet()) {
 			_featureTypeBuilder.add(_key, params.get(_key));
 		}
@@ -156,11 +156,11 @@ public abstract class GeometryManager {
 		}
 	}
 
-	protected void onExcuteFinished() {
+	protected void onExecuteFinished() {
 		poll.shutdown();
 	}
 
-	public abstract void onExcuteFinished(String fid, int pid, Object... params);
+	public abstract void onExecuteFinished(String fid, int pid, Object... params);
 
 	public abstract void process();
 }

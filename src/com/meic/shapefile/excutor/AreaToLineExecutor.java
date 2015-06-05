@@ -5,18 +5,15 @@ import org.opengis.feature.simple.SimpleFeature;
 import com.meic.shapefile.manager.GeometryManager;
 import com.vividsolutions.jts.geom.Geometry;
 
-public class BufferExcuter extends GeometryExcuter {
-	private double distance;
+public class AreaToLineExecutor extends GeometryExecutor {
 
-	public BufferExcuter(SimpleFeature feature, GeometryManager manager, int id, double distance) {
+	public AreaToLineExecutor(SimpleFeature feature, GeometryManager manager, int id) {
 		super(feature, manager, id);
-		this.distance = distance;
 	}
 
 	@Override
 	public void run() {
 		Geometry _shape = (Geometry) feature.getDefaultGeometry();
-		manager.onExcuteFinished(feature.getID(), id, _shape.buffer(distance));
+		manager.onExecuteFinished(feature.getID(), id, _shape.getBoundary());
 	}
-
 }

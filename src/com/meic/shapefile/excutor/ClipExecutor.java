@@ -9,12 +9,12 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
 
-public class ClipExcutor extends GeometryExcuter {
+public class ClipExecutor extends GeometryExecutor {
 	private Envelope clipEnvelope;
 	private GeometryClipper clipper;
 	private static Polygon EMPTY_POLYGON = new Polygon(null, null, new GeometryFactory());
 
-	public ClipExcutor(SimpleFeature feature, GeometryManager manager, int id, Envelope clipEnvelope, GeometryClipper clipper) {
+	public ClipExecutor(SimpleFeature feature, GeometryManager manager, int id, Envelope clipEnvelope, GeometryClipper clipper) {
 		super(feature, manager, id);
 		this.clipEnvelope = clipEnvelope;
 		this.clipper = clipper;
@@ -31,7 +31,7 @@ public class ClipExcutor extends GeometryExcuter {
 		} else {
 			_clipedShape = EMPTY_POLYGON;
 		}
-		manager.onExcuteFinished(feature.getID(), id, _clipedShape);
+		manager.onExecuteFinished(feature.getID(), id, _clipedShape);
 	}
 
 }
