@@ -1,4 +1,4 @@
-package com.meic.shapefile.manager;
+package com.makenv.tools.shapefile.manager;
 
 import java.io.File;
 import java.io.Serializable;
@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.makenv.tools.shapefile.excutor.GeometryExecutor;
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFactorySpi;
 import org.geotools.data.DataStoreFinder;
@@ -28,7 +29,6 @@ import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
-import com.meic.shapefile.excutor.GeometryExecutor;
 /**
  * Geometry manager.
  * @author alei

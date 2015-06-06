@@ -1,8 +1,8 @@
-package com.meic.shapefile.excutor;
+package com.makenv.tools.shapefile.excutor;
 
 import org.opengis.feature.simple.SimpleFeature;
 
-import com.meic.shapefile.manager.GeometryManager;
+import com.makenv.tools.shapefile.manager.GeometryManager;
 import com.vividsolutions.jts.geom.Geometry;
 
 public class AreaToLineExecutor extends GeometryExecutor {

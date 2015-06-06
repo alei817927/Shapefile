@@ -1,6 +1,6 @@
-package com.meic.shapefile.util;
+package com.makenv.tools.shapefile.util;
 
-import com.meic.shapefile.GeometryComparator;
+import com.makenv.tools.shapefile.GeometryComparator;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;

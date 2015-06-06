@@ -1,8 +1,8 @@
-package com.meic.shapefile.manager;
+package com.makenv.tools.shapefile.manager;
 
-import com.meic.shapefile.ShapeFileConstants;
-import com.meic.shapefile.excutor.BufferExecutor;
-import com.meic.shapefile.excutor.GeometryExecutor;
+import com.makenv.tools.shapefile.ShapeFileConstants;
+import com.makenv.tools.shapefile.excutor.BufferExecutor;
+import com.makenv.tools.shapefile.excutor.GeometryExecutor;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.opengis.feature.simple.SimpleFeature;

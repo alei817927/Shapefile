@@ -1,9 +1,9 @@
-package com.meic.shapefile.manager;
+package com.makenv.tools.shapefile.manager;
 
-import com.meic.shapefile.ShapeFileConstants;
-import com.meic.shapefile.excutor.GeometryExecutor;
-import com.meic.shapefile.excutor.IntersectExecutor;
-import com.meic.shapefile.util.GeometryUtil;
+import com.makenv.tools.shapefile.ShapeFileConstants;
+import com.makenv.tools.shapefile.excutor.GeometryExecutor;
+import com.makenv.tools.shapefile.util.GeometryUtil;
+import com.makenv.tools.shapefile.excutor.IntersectExecutor;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
