@@ -51,7 +51,7 @@ public class FileUtil {
   }
 
   /**
-   * 删除一个目录下的除exculde指定的后缀名外的所有子文件或子目录
+   * 删除一个目录下的除exclude指定的后缀名外的所有子文件或子目录
    *
    * @param file
    */
