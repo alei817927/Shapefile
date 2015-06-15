@@ -1,5 +1,6 @@
 package com.makenv.tools.shapefile.manager;
 
+import com.makenv.tools.shapefile.ICallback;
 import com.makenv.tools.shapefile.excutor.GeometryExecutor;
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFactorySpi;
@@ -37,6 +38,7 @@ import java.util.concurrent.Executors;
 public abstract class GeometryManager {
   protected Map<String, SimpleFeature> features;
   protected Map<Integer, SimpleFeature> newFeatures;
+  protected ICallback callback;
   /**
    * 默认8个线程，具体根据处理器来定
    */
@@ -161,9 +163,14 @@ public abstract class GeometryManager {
 
   protected void onExecuteFinished() {
     poll.shutdown();
+    callback.callback();
   }
 
   public abstract void onExecuteFinished(String fid, int pid, Object... params);
 
   public abstract void process();
+
+  public void setCallback(ICallback callback) {
+    this.callback = callback;
+  }
 }
