@@ -163,7 +163,9 @@ public abstract class GeometryManager {
 
   protected void onExecuteFinished() {
     poll.shutdown();
-    callback.callback();
+    if (callback != null) {
+      callback.callback();
+    }
   }
 
   public abstract void onExecuteFinished(String fid, int pid, Object... params);

@@ -28,6 +28,12 @@ public class ClipManager extends GeometryManager {
     init(clipFile);
   }
 
+  public ClipManager(String baseFile, String newFile, Envelope clipEnvelope) throws Exception {
+    super(baseFile, newFile);
+    this.clipEnvelope = clipEnvelope;
+    clipper = new GeometryClipper(clipEnvelope);
+  }
+
   private void init(String clipFile) throws Exception {
     clipEnvelope = GeometryUtil.getEnvelope(clipFile);
     clipper = new GeometryClipper(clipEnvelope);
@@ -49,9 +55,9 @@ public class ClipManager extends GeometryManager {
     System.out.print(processCount + ",");
     if (processCount == features.size()) {
       write();
+      System.out.println();
       super.onExecuteFinished();
       long _cost = System.currentTimeMillis() - startTime;
-      System.out.println();
       System.out.println("\ncost time=" + _cost);
     }
   }
