@@ -3,12 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.makenv.tools</groupId>
   <artifactId>shapefile</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- use the latest snapshot -->
     <geotools.version>13-SNAPSHOT</geotools.version>
+    <version.jdk>1.8</version.jdk>
   </properties>
   <repositories>
     <repository>
@@ -32,6 +33,15 @@
   </repositories>
   <build>
     <plugins>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-compiler-plugin</artifactId>-->
+        <!--<version>3.3</version>-->
+        <!--<configuration>-->
+          <!--<source>${version.jdk}</source>-->
+          <!--<target>${version.jdk}</target>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
