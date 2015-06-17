@@ -63,10 +63,10 @@ public class IntersectManager extends GeometryManager {
     System.out.print(processCount + ",");
     if (processCount == features.size()) {
       write();
+      System.out.println();
       super.onExecuteFinished();
       long _cost = System.currentTimeMillis() - startTime;
-      System.out.println();
-      System.out.println("\ncosttime=" + _cost);
+      System.out.println("\ncost time=" + _cost);
     }
   }
 

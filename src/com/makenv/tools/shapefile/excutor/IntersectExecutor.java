@@ -10,6 +10,7 @@ import org.opengis.feature.simple.SimpleFeature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IntersectExecutor extends GeometryExecutor {
   private static double GRID_AREA = 0;
@@ -26,11 +27,7 @@ public class IntersectExecutor extends GeometryExecutor {
     List<Geometry> _intersectGeometries = new ArrayList<>();
     Geometry _shape = (Geometry) feature.getDefaultGeometry();
     Envelope _envelope = _shape.getEnvelopeInternal();
-    for (Geometry _geometry : geometries) {
-      if (_envelope.intersects(_geometry.getEnvelopeInternal()) && _shape.intersects(_geometry)) {
-        _intersectGeometries.add(_shape.intersection(_geometry));
-      }
-    }
+    _intersectGeometries.addAll(geometries.stream().filter(_geometry -> _envelope.intersects(_geometry.getEnvelopeInternal()) && _shape.intersects(_geometry)).map(_shape::intersection).collect(Collectors.toList()));
     Geometry _geometry = null;
     double _area = 0;
     if (GRID_AREA == 0) {
